@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+:root {
+  --primary-clr-800:#645CBB;
+  --primary-clr-700:#A084DC;
+  --black-clr-800:#000000;
+  --black-clr-700:#03001C;
+  --white-clr-800:#ffffff;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	max-width: 100vw;
+	overflow-x: hidden;
+	font-family: "Lato", sans-serif !important;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
+	}
+}
+
+.site-header{
+  padding:16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.site-logo{
+  display: flex;
+  column-gap: 8px;
+}
+
+.setting-controls{
+  background: var(--white-clr-800) !important;
+  padding: 12px;
+}
+
+iframe{
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.url-form-control{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.url-form-control input{
+  padding: 12px 8px;
+}
+
+.url-form-control span{
+  font-size: 12px;
+  color: #ff6969;
+}
