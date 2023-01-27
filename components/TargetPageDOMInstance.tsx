@@ -5,10 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Spin } from "antd";
 
 export default function TargetPageDOMInstance() {
-	const [html, setHtml] = useState<string | null>(null);
-	const [isLoading, setLoading] = useState<Boolean>(false);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const { targetUrl } = useContext(ScrapperContext);
+	const { isLoading, html } = useContext(ScrapperContext);
 
 	const styles = `
     .highlight {
@@ -22,21 +20,6 @@ export default function TargetPageDOMInstance() {
 		box-shadow: inset 0px 0px 0px 2px rgba(75,156,211,1);
     }
   `;
-	useEffect(() => {
-		if (targetUrl != "") {
-			setLoading(true);
-			fetch(`/api/fetch-webpage?url=${encodeURIComponent(targetUrl)}`)
-				.then((response) => response.json())
-				.then((res: any) => {
-					setHtml(res.page);
-					setLoading(false);
-				})
-				.catch((e) => {
-					console.error(e);
-					setLoading(false);
-				});
-		}
-	}, [targetUrl]);
 
 	const handleDOMONLoad = () => {
 		if (iframeRef.current) {
@@ -83,7 +66,7 @@ export default function TargetPageDOMInstance() {
 
 	if (isLoading) {
 		return (
-			<Spin tip="Loading" size="small">
+			<Spin tip="Loading" size="large">
 				<div className="content" />
 			</Spin>
 		);

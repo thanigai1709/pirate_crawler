@@ -8,24 +8,23 @@ export default function CrawlerControls() {
 	const { setTargetUrl } = useContext(ScrapperContext);
 
 	function handleTargetURL(e: React.ChangeEvent<HTMLInputElement>) {
-		console.log(e.target.value, "asdasdas");
 		setUrl(e.target.value);
 		const urlRegex = /^(https?|ftp|ftps):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\/?$/;
-		if (!url.match(urlRegex)) {
+		if (!e.target.value.match(urlRegex)) {
 			setError("Invalid URL");
 		} else {
 			setError("");
-			setTargetUrl(url);
+			setTargetUrl(e.target.value);
 		}
 
 		if (url === "") {
-			setTargetUrl(url);
+			setTargetUrl("");
 		}
 	}
 
 	return (
 		<div className="url-form-control">
-			<input type="text" placeholder="Target URL" onChange={handleTargetURL} value={url} />
+			<Input placeholder="Target URL" onChange={handleTargetURL} value={url} />
 			{error != "" && <span>{error}</span>}
 		</div>
 	);

@@ -11,6 +11,7 @@ interface ScrapperContextProps {
 	scrapeTargets: ScrapeTarget[] | [];
 	setScrapeTargets: (scrapeTargets: ScrapeTarget[]) => void;
 	isLoading: Boolean;
+	html: string | null;
 }
 
 export const ScrapperContext = createContext<ScrapperContextProps>({
@@ -19,17 +20,33 @@ export const ScrapperContext = createContext<ScrapperContextProps>({
 	scrapeTargets: [],
 	setScrapeTargets: () => {},
 	isLoading: false,
+	html: null,
 });
 
 const ScrapperProvider = ({ children }: any) => {
 	const [targetUrl, setTargetUrl] = useState<string>("");
 	const [scrapeTargets, setScrapeTargets] = useState<ScrapeTarget[] | []>([]);
 	const [isLoading, setLoading] = useState<Boolean>(false);
+	const [html, setHtml] = useState<string | null>(null);
 
-	useEffect(() => {}, [targetUrl]);
+	useEffect(() => {
+		if (targetUrl != "") {
+			setLoading(true);
+			fetch(`/api/fetch-webpage?url=${encodeURIComponent(targetUrl)}`)
+				.then((response) => response.json())
+				.then((res: any) => {
+					setHtml(res.page);
+					setLoading(false);
+				})
+				.catch((e) => {
+					console.error(e);
+					setLoading(false);
+				});
+		}
+	}, [targetUrl]);
 
 	return (
-		<ScrapperContext.Provider value={{ targetUrl, setTargetUrl, scrapeTargets, setScrapeTargets, isLoading }}>
+		<ScrapperContext.Provider value={{ targetUrl, setTargetUrl, scrapeTargets, setScrapeTargets, isLoading, html }}>
 			{children}
 		</ScrapperContext.Provider>
 	);
