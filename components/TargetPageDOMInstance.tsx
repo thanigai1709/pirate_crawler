@@ -1,12 +1,13 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
 import { buildSelector, getElementData } from "@/utils";
-import { useEffect, useState, useRef, useId, useContext } from "react";
+import { useRef, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Spin } from "antd";
+import { Spin, Typography } from "antd";
+import { ScrapeTarget } from "@/types";
 
 export default function TargetPageDOMInstance() {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const { isLoading, html } = useContext(ScrapperContext);
+	const { isLoading, html, targetUrl, scrapeTargets, updateTargets, setScrapeTargets } = useContext(ScrapperContext);
 
 	const styles = `
     .highlight {
@@ -23,7 +24,6 @@ export default function TargetPageDOMInstance() {
 
 	const handleDOMONLoad = () => {
 		if (iframeRef.current) {
-			console.log(iframeRef, "iframe reff");
 			const iframeDoc = iframeRef.current.contentDocument;
 			if (iframeDoc) {
 				const head = iframeDoc.head;
@@ -56,17 +56,21 @@ export default function TargetPageDOMInstance() {
 			target.removeAttribute("data-target-id");
 		} else {
 			const elId = String(uuidv4());
+			const small_id = elId.slice(0, 4);
 			target.setAttribute("data-scrape", "selected");
 			target.setAttribute("data-target-id", elId);
 			const selector = buildSelector(target);
 			const previewData = getElementData(target);
-			console.log(selector, previewData, "payload");
+			let prevState: ScrapeTarget[] = scrapeTargets;
+			prevState.push({ pcDOMid: elId, DOMPath: selector, keyName: `untitled_${small_id}` });
+			console.log(prevState);
+			setScrapeTargets([...prevState]);
 		}
 	};
 
 	if (isLoading) {
 		return (
-			<Spin tip="Loading" size="large">
+			<Spin tip="Loading" size="large" className="ma-10">
 				<div className="content" />
 			</Spin>
 		);
@@ -75,10 +79,15 @@ export default function TargetPageDOMInstance() {
 	if (html != null) {
 		return (
 			<>
+				{JSON.stringify(scrapeTargets)}
 				<iframe srcDoc={html} sandbox="allow-scripts allow-same-origin" ref={iframeRef} onLoad={handleDOMONLoad} />
 			</>
 		);
 	} else {
-		return null;
+		return (
+			<>
+				<Typography.Title level={3}>Please enter a target URL</Typography.Title>
+			</>
+		);
 	}
 }

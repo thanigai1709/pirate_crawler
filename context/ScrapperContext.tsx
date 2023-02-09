@@ -1,9 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-
-interface ScrapeTarget {
-	tempId: string;
-	selector: string;
-}
+import { ScrapeTarget } from "../types/index";
 
 interface ScrapperContextProps {
 	targetUrl: string;
@@ -12,6 +8,7 @@ interface ScrapperContextProps {
 	setScrapeTargets: (scrapeTargets: ScrapeTarget[]) => void;
 	isLoading: Boolean;
 	html: string | null;
+	updateTargets: (target: ScrapeTarget) => void;
 }
 
 export const ScrapperContext = createContext<ScrapperContextProps>({
@@ -21,6 +18,7 @@ export const ScrapperContext = createContext<ScrapperContextProps>({
 	setScrapeTargets: () => {},
 	isLoading: false,
 	html: null,
+	updateTargets: () => {},
 });
 
 const ScrapperProvider = ({ children }: any) => {
@@ -45,8 +43,16 @@ const ScrapperProvider = ({ children }: any) => {
 		}
 	}, [targetUrl]);
 
+	const updateTargets = (target: ScrapeTarget) => {
+		let targetData: ScrapeTarget[] = scrapeTargets;
+		targetData.push(target);
+		setScrapeTargets(targetData);
+	};
+
 	return (
-		<ScrapperContext.Provider value={{ targetUrl, setTargetUrl, scrapeTargets, setScrapeTargets, isLoading, html }}>
+		<ScrapperContext.Provider
+			value={{ targetUrl, setTargetUrl, scrapeTargets, setScrapeTargets, isLoading, html, updateTargets }}
+		>
 			{children}
 		</ScrapperContext.Provider>
 	);

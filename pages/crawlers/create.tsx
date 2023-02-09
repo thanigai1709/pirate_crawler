@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import Head from "next/head";
 import AppHeader from "../../components/AppHeader";
 import { Layout, Menu, theme, Card } from "antd";
@@ -6,9 +7,12 @@ import { useRouter } from "next/router";
 import CrawlerControls from "@/components/CrawlerControls";
 import TargetPageDOMInstance from "@/components/TargetPageDOMInstance";
 import ScrapperProvider, { ScrapperContext } from "@/context/ScrapperContext";
+import NodeGroup from "@/components/NodeGroup";
 const { Content, Sider } = Layout;
 
 export default function CrawlerCreate() {
+	const { scrapeTargets } = useContext(ScrapperContext);
+
 	return (
 		<>
 			<Head>
@@ -23,6 +27,7 @@ export default function CrawlerCreate() {
 						<Layout>
 							<Sider width={300} className="setting-controls">
 								<CrawlerControls />
+								<NodeGroup />
 							</Sider>
 							<Content className="pa-4 h-100vh">
 								<TargetPageDOMInstance />
