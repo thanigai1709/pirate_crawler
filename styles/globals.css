@@ -125,3 +125,22 @@ input.error,.ant-input-password.error{
   border-color: rgb(var(--red-error));
   box-shadow: 0 0 0 2px rgba(var(--red-error),0.5);
 }
+
+.loginForm__SSO{
+  width: 100%;
+}
+
+.loginForm__SSO button{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loginForm__bottom{
+  font-size: 14px;
+  color: rgba(var(--black-clr-700),0.5);
+}
+
+.loginForm__bottom a{
+  font-weight: 600;
+}

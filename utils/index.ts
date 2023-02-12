@@ -1,4 +1,4 @@
-import { SignupError } from "@/types";
+import { SignupError, LoginForm, SignupForm } from "@/types";
 
 export const buildSelector = (el: HTMLElement): string => {
 	let selector = el.nodeName.toLowerCase();
@@ -62,7 +62,7 @@ export function getElementData(el: HTMLElement): any {
 	return data;
 }
 
-export function registerValidate(values) {
+export function registerValidate(values: SignupForm) {
 	const errors: Partial<SignupError> = {};
 
 	if (!values.username) {
@@ -93,6 +93,25 @@ export function registerValidate(values) {
 		errors.cpassword = "Password Not Match...!";
 	} else if (values.cpassword.includes(" ")) {
 		errors.cpassword = "Invalid Confirm Password";
+	}
+
+	return errors;
+}
+
+export function loginValidate(values) {
+	const errors: Partial<LoginForm> = {};
+
+	if (!values.email) {
+		errors.email = "Email required";
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+		errors.email = "Invalid email address";
+	}
+
+	// validation for password
+	if (!values.password) {
+		errors.password = "Password required";
+	} else if (values.password.includes(" ")) {
+		errors.password = "Invalid Password";
 	}
 
 	return errors;

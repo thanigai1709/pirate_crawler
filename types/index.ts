@@ -17,3 +17,8 @@ export interface SignupForm {
 	password: string;
 	cpassword: string;
 }
+
+export interface LoginForm {
+	email: string;
+	password: string;
+}

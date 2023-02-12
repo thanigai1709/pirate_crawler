@@ -1,5 +1,5 @@
 import { GlobalOutlined } from "@ant-design/icons";
-import { Input, Button, message, notification } from "antd";
+import { Input, Button, notification } from "antd";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 
 const SignUpPage: NextPage = () => {
 	const router = useRouter();
-	const [messageApi, contextHolder] = message.useMessage();
 	const [formError, setFormError] = useState<String>("");
 	const onSubmit = async (values: SignupForm) => {
 		if (signupForm.isValid) {
