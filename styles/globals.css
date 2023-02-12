@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 :root {
-  --primary-clr-800:#645CBB;
-  --primary-clr-700:#A084DC;
-  --black-clr-800:#000000;
-  --black-clr-700:#03001C;
-  --white-clr-800:#ffffff;
+  --primary-clr-800:101, 93, 187;
+  --primary-clr-700:160, 133, 219;
+  --black-clr-800:0, 0, 0;
+  --black-clr-700:3, 0, 28;
+  --white-clr-800:255, 255, 255;
+  --red-error:255, 77, 79;
 }
 
 * {
@@ -43,7 +44,7 @@ a {
 }
 
 .setting-controls{
-  background: var(--white-clr-800) !important;
+  background:rgb(var(--white-clr-800)) !important;
   padding: 12px;
 }
 
@@ -66,4 +67,61 @@ iframe{
 .url-form-control span{
   font-size: 12px;
   color: #ff6969;
+}
+
+.loginPage__Wrapper,
+.signupPage__Wrapper{
+  display: flex;
+  min-height:100vh;
+  background-color: rgba(var(--primary-clr-700), 0.2);
+  padding: 12px;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.loginForm__Wrapper,
+.signupForm__Wrapper{
+  display: flex;
+  background-color: rgb(var(--white-clr-800));
+  align-items: center;
+  max-width: 880px;
+  -webkit-box-shadow: 0px 0px 48px -34px rgb(var(--primary-clr-800));
+-moz-box-shadow: 0px 0px 48px -34px rgb(var(--primary-clr-800));
+box-shadow: 0px 0px 48px -34px rgb(var(--primary-clr-800));
+}
+
+.loginForm__banner,
+.signupForm__banner{
+  max-width: 500px;
+  background-color: rgb(var(--primary-clr-800));
+}
+
+.loginForm__content,
+.signupForm__content{
+  padding: 20px 36px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 36px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm__content form,
+.signupForm__content form{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 340px;
+}
+
+span.error.msg{
+  color: rgb(var(--red-error));
+  font-size: 14px;
+}
+
+input.error,.ant-input-password.error{
+  border-color: rgb(var(--red-error));
+  box-shadow: 0 0 0 2px rgba(var(--red-error),0.5);
 }
