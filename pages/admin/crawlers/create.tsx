@@ -1,9 +1,7 @@
 import { useContext, useEffect } from "react";
 import Head from "next/head";
-import AppHeader from "../../components/AppHeader";
+import AppHeader from "@/components/AppHeader";
 import { Layout, Menu, theme, Card } from "antd";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import CrawlerControls from "@/components/CrawlerControls";
 import TargetPageDOMInstance from "@/components/TargetPageDOMInstance";
 import ScrapperProvider, { ScrapperContext } from "@/context/ScrapperContext";

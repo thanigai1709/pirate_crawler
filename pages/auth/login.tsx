@@ -14,7 +14,7 @@ import { getSession, signIn, signOut } from "next-auth/react";
 const LoginPage: NextPage = () => {
 	const router = useRouter();
 	const [formError, setFormError] = useState<String>("");
-
+	const callbackUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/admin`;
 	const onSubmit = async () => {
 		if (loginForm.isValid) {
 			loginForm.setSubmitting(true);
@@ -23,7 +23,7 @@ const LoginPage: NextPage = () => {
 				redirect: false,
 				email: loginForm.values.email,
 				password: loginForm.values.password,
-				callbackUrl: "/",
+				callbackUrl: callbackUrl,
 			});
 			loginForm.resetForm();
 			loginForm.setSubmitting(false);
@@ -33,12 +33,11 @@ const LoginPage: NextPage = () => {
 			if (status.ok) {
 				router.replace(status.url);
 			}
-			console.log(status, "session resp");
 		}
 	};
 
 	async function handleGoogleSignin() {
-		signIn("google", { callbackUrl: "http://localhost:3000" });
+		signIn("google", { callbackUrl: callbackUrl });
 	}
 
 	const loginForm = useFormik({
@@ -102,9 +101,6 @@ const LoginPage: NextPage = () => {
 								<GoogleIcon /> Sign In with Google
 							</Button>
 						</div>
-						<Button block size="large" onClick={() => signOut()}>
-							Signout
-						</Button>
 						<p className="loginForm__bottom">
 							don't have an account yet? &nbsp; <Link href={"/auth/signup"}>Sign Up</Link>
 						</p>

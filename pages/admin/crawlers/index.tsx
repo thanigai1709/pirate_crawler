@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Button, Card, Divider, Typography } from "antd";
 import React from "react";
-import DashboardLayout from "../../components/DashboardLayout";
+import DashboardLayout from "@/components/DashboardLayout";
 const { Title } = Typography;
 import { Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";

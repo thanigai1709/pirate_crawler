@@ -1,5 +1,8 @@
-import { GlobalOutlined } from "@ant-design/icons";
+import { GlobalOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Dropdown, MenuProps, Menu, Button } from "antd";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import LoggedInUserHeader from "./LoggedInUserHeader";
 
 export default function AppHeader() {
 	return (
@@ -10,6 +13,7 @@ export default function AppHeader() {
 					<span className="site-logo__text">PIRATE CRAWLER</span>
 				</Link>
 			</div>
+			<LoggedInUserHeader />
 		</header>
 	);
 }

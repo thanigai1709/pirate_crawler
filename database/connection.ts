@@ -4,6 +4,7 @@ const connectMongo = async (): Promise<boolean | undefined> => {
 	try {
 		const { connection } = await mongoose.connect(dbURI);
 		if (connection.readyState === 1) {
+			console.log("connected successfully");
 			return Promise.resolve(true);
 		}
 	} catch (error) {

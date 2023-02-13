@@ -1,12 +1,10 @@
 //@ts-nocheck
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongo from "@/database/connection";
 import User from "../../../model/User.model";
 import { compareSync, hash } from "bcryptjs";
-import { signIn } from "next-auth/react";
 
 export default NextAuth({
 	providers: [
@@ -29,21 +27,24 @@ export default NextAuth({
 					throw new Error("Incorrect email or password");
 				}
 				const sessionUser = {
-					id: user.id,
 					name: user.username,
 					email: user.email,
+					image: user.avatar ? user.avatar.url : null,
 				};
 				return sessionUser;
 			},
 		}),
 	],
-	secret: "34feb914c099df25794bf9ccb85bea72",
+	secret: process.env.NEXTAUTH_SECRET,
 	session: {
 		strategy: "jwt",
 	},
 	callbacks: {
 		async signIn({ user, account, profile, email, credentials }) {
 			if (account.provider === "google") {
+				connectMongo().catch((e) => {
+					throw new Error("Error while signing up...");
+				});
 				const user = await User.findOne({ email: profile.email });
 				if (!user) {
 					User.create(
@@ -72,5 +73,9 @@ export default NextAuth({
 			}
 			return true;
 		},
+	},
+	pages: {
+		signIn: "/auth/login",
+		signOut: "/",
 	},
 });

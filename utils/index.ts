@@ -6,6 +6,7 @@ export const buildSelector = (el: HTMLElement): string => {
 		selector += "#" + el.id;
 	}
 	if (el.classList.length > 0) {
+		//@ts-ignore
 		selector += "." + [...el.classList].join(".");
 	}
 	let parent = el.parentNode as HTMLElement;
@@ -16,6 +17,7 @@ export const buildSelector = (el: HTMLElement): string => {
 			parentSelector += "#" + parent.id;
 		}
 		if (parent?.classList?.length > 0) {
+			//@ts-ignore
 			parentSelector += "." + [...parent?.classList].join(".");
 		}
 		selector = parentSelector + " > " + selector;
