@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { registerValidate } from "@/utils";
 import { SignupForm } from "@/types";
 import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
 
 const SignUpPage: NextPage = () => {
 	const router = useRouter();
@@ -134,3 +135,18 @@ const SignUpPage: NextPage = () => {
 };
 
 export default SignUpPage;
+
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req });
+	if (session) {
+		return {
+			redirect: {
+				destination: "/",
+				permanant: false,
+			},
+		};
+	}
+	return {
+		props: { session },
+	};
+}

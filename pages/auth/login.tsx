@@ -1,22 +1,21 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Button, Input, Form, Divider } from "antd";
+import { Button, Input } from "antd";
 import Lottie from "react-lottie-player";
 import meowAnimation from "../../public/static/meow.json";
-import { GlobalOutlined, GoogleCircleFilled } from "@ant-design/icons";
+import { GlobalOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { loginValidate } from "@/utils";
 import { useRouter } from "next/router";
-import { getSession, signIn } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 
 const LoginPage: NextPage = () => {
 	const router = useRouter();
 	const [formError, setFormError] = useState<String>("");
 
 	const onSubmit = async () => {
-		console.log(loginForm.values);
 		if (loginForm.isValid) {
 			loginForm.setSubmitting(true);
 			setFormError("");
@@ -103,6 +102,9 @@ const LoginPage: NextPage = () => {
 								<GoogleIcon /> Sign In with Google
 							</Button>
 						</div>
+						<Button block size="large" onClick={() => signOut()}>
+							Signout
+						</Button>
 						<p className="loginForm__bottom">
 							don't have an account yet? &nbsp; <Link href={"/auth/signup"}>Sign Up</Link>
 						</p>
@@ -141,13 +143,12 @@ const GoogleIcon = () => {
 export async function getServerSideProps({ req }) {
 	const session = await getSession({ req });
 	if (session) {
-		// return {
-		// 	redirect: {
-		// 		destination: "/",
-		// 		permanant: false,
-		// 	},
-		// };
-		console.log(session, "session exist");
+		return {
+			redirect: {
+				destination: "/",
+				permanant: false,
+			},
+		};
 	}
 	return {
 		props: { session },
