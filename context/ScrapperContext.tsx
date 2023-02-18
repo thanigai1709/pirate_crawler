@@ -28,6 +28,8 @@ const ScrapperProvider = ({ children }: any) => {
 	const [html, setHtml] = useState<string | null>(null);
 
 	useEffect(() => {
+		setScrapeTargets([]);
+		setHtml(null);
 		if (targetUrl != "") {
 			setLoading(true);
 			fetch(`/api/fetch-webpage?url=${encodeURIComponent(targetUrl)}`)

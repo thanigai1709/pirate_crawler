@@ -56,7 +56,7 @@ export default function TargetPageDOMInstance() {
 			target.removeAttribute("data-target-id");
 		} else {
 			const elId = String(uuidv4());
-			const small_id = elId.slice(0, 4);
+			const small_id = elId.slice(0, 6);
 			target.setAttribute("data-scrape", "selected");
 			target.setAttribute("data-target-id", elId);
 			const selector = buildSelector(target);
@@ -79,15 +79,10 @@ export default function TargetPageDOMInstance() {
 	if (html != null) {
 		return (
 			<>
-				{JSON.stringify(scrapeTargets)}
 				<iframe srcDoc={html} sandbox="allow-scripts allow-same-origin" ref={iframeRef} onLoad={handleDOMONLoad} />
 			</>
 		);
 	} else {
-		return (
-			<>
-				<Typography.Title level={3}>Please enter a target URL</Typography.Title>
-			</>
-		);
+		return null;
 	}
 }

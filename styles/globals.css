@@ -147,3 +147,47 @@ input.error,.ant-input-password.error{
 .loginForm__bottom a{
   font-weight: 600;
 }
+
+.target-page__preview{
+  height:calc(100vh - 61px);
+}
+
+.target-page__header{
+  padding: 10px 15px;
+  background-color: rgb(var(--white-clr-800));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(var(--black-clr-700), 0.06);
+}
+
+.url-form-control{
+  flex-basis: 500px;
+}
+
+.url-form-control input{
+  font-size: 18px;
+}
+
+.target-page__header button{
+  text-transform: capitalize;
+}
+
+.target-node__group{
+  background-color:rgba(var(--black-clr-700), 0.06);
+  height: 500px;
+  overflow-y: auto;
+}
+
+.target-node__group-title{
+  padding: 15px;
+  background-color:rgb(var(--white-clr-800));
+  border: 1px solid rgba(var(--black-clr-700), 0.06);
+}
+
+.target-node__group-container{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

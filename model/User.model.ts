@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const UserSchema: Schema = new Schema(
 	{
@@ -8,6 +8,12 @@ const UserSchema: Schema = new Schema(
 		auth_provider: { type: String, required: true },
 		auth_token: String,
 		avatar: { url: String, file_name: String },
+		crawlers: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Crawler",
+			},
+		],
 	},
 	{ timestamps: true }
 );

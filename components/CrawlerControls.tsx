@@ -1,4 +1,5 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
+import { GlobalOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import React, { useContext, useState } from "react";
 
@@ -19,9 +20,17 @@ export default function CrawlerControls() {
 	}
 
 	return (
-		<div className="url-form-control">
-			<Input placeholder="Target URL" onChange={handleTargetURL} value={url} />
-			{error != "" && <span>{error}</span>}
-		</div>
+		<>
+			<div className="url-form-control">
+				<Input
+					placeholder="Target URL"
+					onChange={handleTargetURL}
+					value={url}
+					size={"large"}
+					status={error ? "error" : ""}
+					prefix={<GlobalOutlined style={{ fontSize: "20px", color: "rgb(var(--black-clr-700), 0.08" }} />}
+				/>
+			</div>
+		</>
 	);
 }

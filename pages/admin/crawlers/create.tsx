@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import Head from "next/head";
 import AppHeader from "@/components/AppHeader";
-import { Layout, Menu, theme, Card } from "antd";
-import CrawlerControls from "@/components/CrawlerControls";
+import { Layout, Menu, theme, Card, Button } from "antd";
 import TargetPageDOMInstance from "@/components/TargetPageDOMInstance";
 import ScrapperProvider, { ScrapperContext } from "@/context/ScrapperContext";
 import NodeGroup from "@/components/NodeGroup";
+import APICustomizerHeader from "@/components/APICustomizerHeader";
 const { Content, Sider } = Layout;
 
 export default function CrawlerCreate() {
@@ -19,15 +19,16 @@ export default function CrawlerCreate() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
 			<Layout>
 				<ScrapperProvider>
+					<APICustomizerHeader type="create" />
 					<Content>
 						<Layout>
 							<Sider width={300} className="setting-controls">
-								<CrawlerControls />
 								<NodeGroup />
 							</Sider>
-							<Content className="pa-4 h-100vh">
+							<Content className="pa-4 target-page__preview">
 								<TargetPageDOMInstance />
 							</Content>
 						</Layout>
