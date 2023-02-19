@@ -2,6 +2,10 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 const CrawlerSchema: Schema = new Schema(
 	{
+		apiName: {
+			type: String,
+			required: true,
+		},
 		targetUrl: {
 			type: String,
 			required: true,
