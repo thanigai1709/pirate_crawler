@@ -24,12 +24,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	//@ts-ignore
 	const checkExist = await User.findOne({ email });
 	if (checkExist) return res.status(409).send({ status: false, message: "User already exist" });
-	//@ts-ignore
-	User.create(
-		{ username, email, password: await hash(password, 12), auth_provider: "credentials" },
-		function (err, data) {
-			if (err) return res.status(502).send({ status: false, message: "error while creating the user", stack: err });
-			res.status(200).send({ status: true, user: data });
-		}
-	);
+	try {
+		//@ts-ignore
+		User.create(
+			{
+				username,
+				email,
+				password: await hash(password, 12),
+				auth_provider: "credentials",
+				apiKey: await hash("34feb914c099df25794bf9", 12),
+			},
+			function (err, data) {
+				if (err) return res.status(502).send({ status: false, message: "error while creating the user", stack: err });
+				res.status(200).send({ status: true, user: data });
+			}
+		);
+	} catch (error) {
+		return res.status(502).send({ status: false, message: "error while updating the crawler", stack: error });
+	}
 }

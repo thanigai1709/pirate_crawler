@@ -18,7 +18,7 @@ export default NextAuth({
 			authorize: async (credentials) => {
 				connectMongo().catch((e) => ({ error: "Connection Failed...!" }));
 				//@ts-ignore
-				const user = await User.findOne({ email: credentials.email });
+				const user = await User.findOne({ email: credentials.email }).select("+password");
 				if (!user) {
 					throw new Error("No user Found with Email Please Sign Up...!");
 				}
@@ -52,6 +52,7 @@ export default NextAuth({
 							username: profile.name,
 							email: profile.email,
 							password: await hash(profile.name + "googleuser", 12),
+							apiKey: await hash("34feb914c099df25794bf9", 12),
 							auth_provider: account.provider,
 							avatar: {
 								url: profile.picture,

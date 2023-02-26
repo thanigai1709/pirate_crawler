@@ -6,6 +6,9 @@ import Crawler from "../../../model/Crawler.model";
 export const config = {
 	api: {
 		externalResolver: true,
+		bodyParser: {
+			sizeLimit: "20mb", // Set desired value here
+		},
 	},
 };
 
@@ -21,12 +24,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	if (id && id != undefined) {
 		//@ts-ignore
-		const crawler = await Crawler.findById(id);
+		const crawler = await Crawler.findById(id).select("-HTMLDOM").populate("user");
 		if (!crawler) return res.status(404).send({ status: false, message: "Crawler not found" });
 		res.status(200).send({ status: true, crawler });
 	} else {
 		//@ts-ignore
-		const crawler = await Crawler.find();
+		const crawler = await Crawler.find().populate("user");
 		res.status(200).send({ status: true, crawler });
 	}
 }

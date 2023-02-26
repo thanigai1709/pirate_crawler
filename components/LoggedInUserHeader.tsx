@@ -10,7 +10,7 @@ const LoggedInUserHeader = () => {
 		{
 			key: "1",
 			label: (
-				<Link href={"/admin/profile"}>
+				<Link href={"/dashboard/profile"}>
 					<UserOutlined /> Profile
 				</Link>
 			),
@@ -30,7 +30,13 @@ const LoggedInUserHeader = () => {
 			<div>
 				<Dropdown menu={{ items }}>
 					<a onClick={(e) => e.preventDefault()}>
-						<Avatar size={40} src={<img src={data.user.image} alt="avatar" referrerPolicy="no-referrer" />} />
+						{data.user.image ? (
+							<Avatar size={40} src={<img src={data.user.image} alt="avatar" referrerPolicy="no-referrer" />} />
+						) : (
+							<Avatar size={40} style={{ backgroundColor: "#645cbb" }}>
+								{data.user.name.charAt(0).toLocaleUpperCase()}
+							</Avatar>
+						)}
 					</a>
 				</Dropdown>
 			</div>

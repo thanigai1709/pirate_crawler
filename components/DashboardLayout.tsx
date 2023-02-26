@@ -16,7 +16,6 @@ export default function DashboardLayout({ children }: props) {
 	} = theme.useToken();
 
 	const router = useRouter();
-	console.log(router.pathname, "router path");
 	return (
 		<>
 			<AppHeader />
@@ -36,10 +35,10 @@ export default function DashboardLayout({ children }: props) {
 								defaultSelectedKeys={[router.pathname]}
 							>
 								<Menu.Item key={"admin/crawlers"}>
-									<Link href={"/admin/crawlers"}>Crawler API's</Link>
+									<Link href={"/dashboard/crawlers"}>Crawler API's</Link>
 								</Menu.Item>
 								<Menu.Item key={"admin/settings"}>
-									<Link href={"/admin/settings"}>Settings</Link>
+									<Link href={"/dashboard/settings"}>Settings</Link>
 								</Menu.Item>
 							</Menu>
 						</Sider>

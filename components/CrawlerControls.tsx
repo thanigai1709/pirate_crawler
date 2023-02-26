@@ -1,13 +1,19 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
 import { GlobalOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-export default function CrawlerControls() {
+export default function CrawlerControls({ mode }) {
 	const [url, setUrl] = useState("");
 	const [error, setError] = useState<string>("");
-	const { setTargetUrl } = useContext(ScrapperContext);
+	const { setTargetUrl, targetUrl } = useContext(ScrapperContext);
 	const urlRegex = /^(https?|ftp|ftps):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\/?$/;
+
+	useEffect(() => {
+		if (mode === "UPDATE") {
+			setUrl(targetUrl);
+		}
+	}, []);
 
 	function handleTargetURL(e: React.ChangeEvent<HTMLInputElement>) {
 		setUrl(e.target.value);

@@ -1,41 +1,39 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
+import { ScrapperUpdateContext } from "@/context/ScrapperContextUpdate";
 import { ArrowLeftOutlined, GlobalOutlined } from "@ant-design/icons";
 import { Button, notification } from "antd";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import CrawlerControls from "./CrawlerControls";
 
-interface HeaderProps {
-	type: "Create" | "Update";
-}
-
-const APICustomizerHeader = ({ type = "Create" }: HeaderProps) => {
+const APICustomizerHeader = () => {
 	const [isLoading, setLoading] = useState(false);
-	const router = useRouter();
-	const { apiName, targetUrl, scrapeTargets, html } = useContext(ScrapperContext);
-	const { data } = useSession();
-	async function createCrawler() {
+	const { scrapeTargets, html, apiName, crawlerData } = useContext(ScrapperUpdateContext);
+
+	async function updateCrawler() {
 		setLoading(true);
 		let headers = new Headers();
 		headers.append("Content-Type", "application/json");
 		let payloadData = JSON.stringify({
 			apiName,
-			targetUrl,
 			crawlTargets: scrapeTargets,
-			HTMLDOM: html,
-			userEmail: data.user.email,
+			crawlType: "DYNAMIC",
+			crawlID: crawlerData?._id,
 		});
-		let resp: any = await fetch("/api/crawlers/create", {
-			method: "POST",
+		let resp: any = await fetch("/api/crawlers/update", {
+			method: "PUT",
 			headers: headers,
 			body: payloadData,
 		});
 		resp = await resp.json();
 		if (resp.status) {
 			setLoading(false);
-			return router.replace(`/dashboard/crawlers/${resp.data._id}`);
+			notification.open({
+				type: "success",
+				message: "Your changes have been saved",
+				duration: 2,
+			});
 		} else {
 			notification.open({
 				type: "error",
@@ -54,15 +52,15 @@ const APICustomizerHeader = ({ type = "Create" }: HeaderProps) => {
 					<ArrowLeftOutlined />
 				</Button>
 			</Link>
-			<CrawlerControls mode={type} />
+			<CrawlerControls />
 			<Button
 				type={"primary"}
 				size={"large"}
-				onClick={createCrawler}
+				onClick={updateCrawler}
 				loading={isLoading}
-				disabled={scrapeTargets.length > 0 ? false : true}
+				disabled={scrapeTargets.length === 0 ? true : false}
 			>
-				{type}
+				Update
 			</Button>
 		</header>
 	);

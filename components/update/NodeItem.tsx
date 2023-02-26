@@ -1,4 +1,5 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
+import { ScrapperUpdateContext } from "@/context/ScrapperContextUpdate";
 import { ScrapeTarget } from "@/types";
 import { DeleteOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
@@ -10,7 +11,7 @@ export interface Props {
 
 const NodeItem = ({ nodeData }: Props) => {
 	const [keyName, setKeyName] = useState<string>(nodeData.keyName);
-	const { setScrapeTargets, scrapeTargets } = useContext(ScrapperContext);
+	const { setScrapeTargets, scrapeTargets } = useContext(ScrapperUpdateContext);
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newKeyName = e.target.value;
 		setKeyName(newKeyName);

@@ -22,7 +22,7 @@ export default function CrawlerCreate() {
 
 			<Layout>
 				<ScrapperProvider>
-					<APICustomizerHeader type="create" />
+					<APICustomizerHeader type="Create" />
 					<Content>
 						<Layout>
 							<Sider width={300} className="setting-controls">

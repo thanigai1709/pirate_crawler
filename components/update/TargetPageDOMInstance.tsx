@@ -4,10 +4,12 @@ import { useRef, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Button, Spin, Typography } from "antd";
 import { ScrapeTarget } from "@/types";
+import { ScrapperUpdateContext } from "@/context/ScrapperContextUpdate";
 
 export default function TargetPageDOMInstance() {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const { isLoading, html, scrapeTargets, setScrapeTargets, setApiName } = useContext(ScrapperContext);
+	const { isLoading, html, scrapeTargets, setScrapeTargets, setApiName, crawlerData } =
+		useContext(ScrapperUpdateContext);
 	const styles = `
     .highlight {
 		-webkit-box-shadow: inset 0px 0px 0px 2px rgba(240,88,88,1);
@@ -36,6 +38,7 @@ export default function TargetPageDOMInstance() {
 				iframeDoc.addEventListener("mouseover", handleMouseOver, true);
 				iframeDoc.addEventListener("mouseout", handleMouseOut, true);
 				iframeDoc.addEventListener("click", handleClick, true);
+				setScrapeTargets(crawlerData.crawlTargets);
 			}
 		}
 	};

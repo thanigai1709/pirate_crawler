@@ -14,7 +14,7 @@ import { getSession, signIn, signOut } from "next-auth/react";
 const LoginPage: NextPage = () => {
 	const router = useRouter();
 	const [formError, setFormError] = useState<String>("");
-	const callbackUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/admin`;
+	const callbackUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`;
 	const onSubmit = async () => {
 		if (loginForm.isValid) {
 			loginForm.setSubmitting(true);
@@ -28,6 +28,7 @@ const LoginPage: NextPage = () => {
 			loginForm.resetForm();
 			loginForm.setSubmitting(false);
 			if (status.error != null && !status.ok) {
+				console.log(status, "error");
 				setFormError(status.error);
 			}
 			if (status.ok) {

@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import { ScrapeTarget } from "../types/index";
 
-interface ScrapperContextProps {
+interface ScrapperUpdateContextProps {
 	targetUrl: string;
 	setTargetUrl: (targetUrl: string) => void;
 	scrapeTargets: ScrapeTarget[] | [];
@@ -11,9 +11,11 @@ interface ScrapperContextProps {
 	apiName: string;
 	setApiName: (name: string) => void;
 	updateTargets: (target: ScrapeTarget) => void;
+	crawlerData: any;
+	setCrawlerData: (target: any) => void;
 }
 
-export const ScrapperContext = createContext<ScrapperContextProps>({
+export const ScrapperUpdateContext = createContext<ScrapperUpdateContextProps>({
 	targetUrl: "",
 	setTargetUrl: () => {},
 	scrapeTargets: [],
@@ -23,14 +25,17 @@ export const ScrapperContext = createContext<ScrapperContextProps>({
 	updateTargets: () => {},
 	apiName: "",
 	setApiName: () => {},
+	crawlerData: "",
+	setCrawlerData: () => {},
 });
 
-const ScrapperProvider = ({ children }: any) => {
+const ScrapperUpdateProvider = ({ children }: any) => {
 	const [targetUrl, setTargetUrl] = useState<string>("");
 	const [scrapeTargets, setScrapeTargets] = useState<ScrapeTarget[] | []>([]);
 	const [apiName, setApiName] = useState<string>("");
 	const [isLoading, setLoading] = useState<Boolean>(false);
 	const [html, setHtml] = useState<string | null>(null);
+	const [crawlerData, setCrawlerData] = useState<Object>({});
 
 	useEffect(() => {
 		setScrapeTargets([]);
@@ -57,7 +62,7 @@ const ScrapperProvider = ({ children }: any) => {
 	};
 
 	return (
-		<ScrapperContext.Provider
+		<ScrapperUpdateContext.Provider
 			value={{
 				targetUrl,
 				setTargetUrl,
@@ -68,11 +73,13 @@ const ScrapperProvider = ({ children }: any) => {
 				updateTargets,
 				apiName,
 				setApiName,
+				crawlerData,
+				setCrawlerData,
 			}}
 		>
 			{children}
-		</ScrapperContext.Provider>
+		</ScrapperUpdateContext.Provider>
 	);
 };
 
-export default ScrapperProvider;
+export default ScrapperUpdateProvider;
