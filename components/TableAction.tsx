@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const TableAction = ({ crawlData }) => {
-	console.log(crawlData, "crawl data");
 	const router = useRouter();
 	const [open, setOpen] = useState<boolean>(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);

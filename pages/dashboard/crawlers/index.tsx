@@ -18,7 +18,6 @@ interface DataType {
 }
 
 export default function Crawlers({ pageData }) {
-	console.log(pageData);
 	const columns: ColumnsType<DataType> = [
 		{
 			title: "Name",
@@ -45,8 +44,6 @@ export default function Crawlers({ pageData }) {
 			url: d.targetUrl,
 		};
 	});
-
-	console.log(data, "table data");
 
 	return (
 		<>
@@ -78,6 +75,5 @@ export async function getServerSideProps({ req }) {
 		`${process.env.NEXT_PUBLIC_SITE_URL}api/crawlers/getByUserEmail?email=${session.user.email}`
 	);
 	crawlers = await crawlers.json();
-	console.log(crawlers, "request");
 	return { props: { pageData: crawlers } };
 }
