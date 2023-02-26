@@ -25,6 +25,7 @@ const NodeItem = ({ nodeData }: Props) => {
 	};
 
 	const handleDelete = () => {
+		//@ts-ignore
 		setScrapeTargets(scrapeTargets.filter((t) => t.pcDOMid !== nodeData.pcDOMid));
 	};
 
