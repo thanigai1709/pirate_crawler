@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import chrome from "chrome-aws-lambda";
+import puppeteer from "puppeteer-core";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -12,9 +13,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return;
 		}
 		const { url } = req.query;
-		const browser = await puppeteer.launch({
-			headless: true,
-		});
+		const browser = await puppeteer.launch(
+			process.env.NODE_ENV === "production"
+				? {
+						args: chrome.args,
+						executablePath: await chrome.executablePath,
+						headless: chrome.headless,
+				  }
+				: {
+						executablePath: "/usr/bin/google-chrome-stable",
+						headless: true,
+				  }
+		);
 		const page = await browser.newPage();
 		await page.goto(String(url));
 		await page.evaluate(() => {
