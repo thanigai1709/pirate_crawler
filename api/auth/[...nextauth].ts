@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongo from "@/database/connection";
-import User from "../../../model/User.model";
+import User from "@/model/User.model";
 import { compareSync, hash } from "bcryptjs";
 
 export default NextAuth({

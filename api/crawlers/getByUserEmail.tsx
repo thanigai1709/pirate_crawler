@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectMongo from "@/database/connection";
 import type { NextApiRequest, NextApiResponse } from "next";
-import Crawler from "../../../model/Crawler.model";
+import Crawler from "@/model/Crawler.model";
 import User from "@/model/User.model";
 
 export const config = {
