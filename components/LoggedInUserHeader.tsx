@@ -1,4 +1,4 @@
-import { SettingOutlined, UserOutlined } from "@ant-design/icons";
+import { LogoutOutlined, SettingOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
@@ -11,7 +11,7 @@ const LoggedInUserHeader = () => {
 			key: "1",
 			label: (
 				<Link href={"/dashboard/settings"}>
-					<UserOutlined /> Settings
+					<SettingOutlined /> Settings
 				</Link>
 			),
 		},
@@ -19,7 +19,7 @@ const LoggedInUserHeader = () => {
 			key: "2",
 			label: (
 				<span onClick={() => signOut()}>
-					<SettingOutlined />
+					<LogoutOutlined />
 					&nbsp; Logout
 				</span>
 			),
