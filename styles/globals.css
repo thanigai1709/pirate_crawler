@@ -288,3 +288,11 @@ input.error,.ant-input-password.error{
   background-color: rgb(var(--primary-clr-800));
   color: rgb(var(--white-clr-800));
 }
+
+
+@media screen and (max-width:1024px) {
+  body{
+      visibility: hidden;
+      display: none;
+  }  
+}
