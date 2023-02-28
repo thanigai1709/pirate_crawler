@@ -214,3 +214,77 @@ input.error,.ant-input-password.error{
   justify-content: space-between;
   align-items: center;
 }
+
+.notFound-page__wrapper{
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.notFound-page__container{
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-logo{
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.app-logo__img{
+  width: 28px;
+  height: 28px;
+}
+
+.app-logo{
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.page-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.page-header__nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  padding: 18px 15px;
+  margin: auto;
+
+}
+
+.page-header__links{
+  display: flex;
+  column-gap: 22px;
+  align-items: center;
+}
+
+.page-header__links a{
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(var(--primary-clr-800));
+}
+
+.page-header__links .btn{
+  border: 2px solid rgb(var(--primary-clr-800));
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.4s ease;
+}
+
+.page-header__links .btn:hover,.page-header__links .btn:focus{
+  background-color: rgb(var(--primary-clr-800));
+  color: rgb(var(--white-clr-800));
+}
