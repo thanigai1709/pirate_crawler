@@ -1,16 +1,15 @@
-import { GlobalOutlined } from "@ant-design/icons";
 import { Input, Button, notification } from "antd";
 import { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie-player";
-import herocatAnimation from "../../public/static/cat-hero.json";
+import catWater from "../../public/static/cat-water.json";
 import { useFormik } from "formik";
 import { registerValidate } from "@/utils";
 import { SignupForm } from "@/types";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
+import AppLogo from "@/components/AppLogo";
 
 const SignUpPage: NextPage = () => {
 	const router = useRouter();
@@ -68,13 +67,10 @@ const SignUpPage: NextPage = () => {
 			<section className="signupPage__Wrapper">
 				<div className="signupForm__Wrapper">
 					<div className="signupForm__banner">
-						<Lottie animationData={herocatAnimation} loop={true} play />
+						<Lottie animationData={catWater} loop={true} play />
 					</div>
 					<div className="signupForm__content">
-						<Link className="site-logo" href={"/"}>
-							<GlobalOutlined />
-							<span className="site-logo__text">PIRATE CRAWLER</span>
-						</Link>
+						<AppLogo route={"/"} />
 						<form onSubmit={signupForm.handleSubmit}>
 							<Input
 								size="large"

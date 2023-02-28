@@ -3,13 +3,13 @@ import Head from "next/head";
 import { Button, Input } from "antd";
 import Lottie from "react-lottie-player";
 import meowAnimation from "../../public/static/meow.json";
-import { GlobalOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { loginValidate } from "@/utils";
 import { useRouter } from "next/router";
 import { getSession, signIn, signOut } from "next-auth/react";
+import AppLogo from "@/components/AppLogo";
 
 const LoginPage: NextPage = () => {
 	const router = useRouter();
@@ -64,10 +64,7 @@ const LoginPage: NextPage = () => {
 						<Lottie animationData={meowAnimation} loop={true} play />
 					</div>
 					<div className="loginForm__content">
-						<Link className="site-logo" href={"/"}>
-							<GlobalOutlined />
-							<span className="site-logo__text">PIRATE CRAWLER</span>
-						</Link>
+						<AppLogo route={"/"} />
 						<form onSubmit={loginForm.handleSubmit}>
 							<Input
 								type="email"
