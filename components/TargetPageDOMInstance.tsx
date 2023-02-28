@@ -1,8 +1,8 @@
 import { ScrapperContext } from "@/context/ScrapperContext";
-import { buildSelector, getElementData } from "@/utils";
-import { useRef, useContext, useEffect, useState } from "react";
+import { buildSelector } from "@/utils";
+import { useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Button, Spin, Typography } from "antd";
+import { Spin } from "antd";
 import { ScrapeTarget } from "@/types";
 
 export default function TargetPageDOMInstance() {
