@@ -1,10 +1,6 @@
 import Head from "next/head";
-import { Card, Typography } from "antd";
 import React from "react";
-import DashboardLayout from "@/components/DashboardLayout";
 import PageLayout from "@/components/PageLayout";
-import { NextPage } from "next";
-const { Title } = Typography;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Lottie from "react-lottie-player";

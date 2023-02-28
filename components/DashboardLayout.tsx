@@ -34,10 +34,10 @@ export default function DashboardLayout({ children }: props) {
 								}}
 								defaultSelectedKeys={[router.pathname]}
 							>
-								<Menu.Item key={"admin/crawlers"}>
+								<Menu.Item key={"dashbaord/crawlers"}>
 									<Link href={"/dashboard/crawlers"}>Crawler API's</Link>
 								</Menu.Item>
-								<Menu.Item key={"admin/settings"}>
+								<Menu.Item key={"dashboard/settings"}>
 									<Link href={"/dashboard/settings"}>Settings</Link>
 								</Menu.Item>
 							</Menu>

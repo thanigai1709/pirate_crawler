@@ -1,7 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Head from "next/head";
-import AppHeader from "@/components/AppHeader";
-import { Layout, Menu, theme, Card, Button } from "antd";
+import { Layout } from "antd";
 import TargetPageDOMInstance from "@/components/TargetPageDOMInstance";
 import ScrapperProvider, { ScrapperContext } from "@/context/ScrapperContext";
 import NodeGroup from "@/components/NodeGroup";
