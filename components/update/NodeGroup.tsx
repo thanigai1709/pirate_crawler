@@ -11,7 +11,7 @@ export interface Props {
 
 const NodeGroup = () => {
 	const { scrapeTargets, targetUrl, apiName, setApiName, crawlerData, isLoading } = useContext(ScrapperUpdateContext);
-	const apiUrl = `${process.env.NEXT_PUBLIC_SITE_URL}api/public/${crawlerData.user?.apiKey}/${crawlerData._id}`;
+	const apiUrl = `${process.env.NEXT_PUBLIC_SITE_URL}api/public/${crawlerData._id}?apiKey=${crawlerData.user?.apiKey}`;
 	useEffect(() => {}, [crawlerData]);
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setApiName(e.target.value);

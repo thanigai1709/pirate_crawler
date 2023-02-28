@@ -42,7 +42,7 @@ const ScrapperUpdateProvider = ({ children }: any) => {
 		setHtml(null);
 		if (targetUrl != "") {
 			setLoading(true);
-			fetch(`/api/fetch-webpage?url=${encodeURIComponent(targetUrl)}`)
+			fetch(`/api/fetch-page?url=${encodeURIComponent(targetUrl)}`)
 				.then((response) => response.json())
 				.then((res: any) => {
 					setHtml(res.page);
